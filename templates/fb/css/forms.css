@@ -1,0 +1,138 @@
+
+.leadform, .mindbox {
+    position: absolute;
+    top: -4px;
+    right: 0;
+    border-radius: 15px;
+    padding: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.mindbox {
+    position: relative;
+    top: 0px;
+    left: 4px;
+    border-radius: 4px;
+    padding: 11px;
+}
+
+.leadform.active,
+.mindbox.yes {
+    background:#4cae4c; color:#FFF
+}
+
+.leadform.archived,
+.mindbox.no {
+    background:#AA3333; color:#FFF;
+}
+
+.leadform.active:hover,
+.mindbox.yes:hover {
+    background-color: #f4511e;
+    color: white;
+}
+
+.leadform.archived:hover,
+.mindbox.no:hover{
+    background-color: #3e8e41;
+    color: white;
+}
+
+.list-group-item.custom {
+    width: 94%;
+    display: inline-block;
+}
+
+/* MindBox switcher */
+
+.inner-switch {
+    position: absolute;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: 3px 6px;
+}
+
+.inner-switch input {display:none;}
+
+.inner-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.inner-slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .inner-slider {
+    background-color: #2196F3;
+}
+
+input:focus + .inner-slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .inner-slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded inner-sliders */
+.inner-slider.round {
+    border-radius: 34px;
+}
+
+.inner-slider.round:before {
+    border-radius: 50%;
+}
+
+
+/* Switcher's tooltips */
+
+.inner-tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.inner-tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.inner-tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.inner-tooltip .tooltiptext {
+    top: -5px;
+    left: 105%;
+}

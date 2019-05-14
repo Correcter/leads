@@ -1,0 +1,24 @@
+###> symfony/framework-bundle ###
+/.idea
+/.env
+/cert/
+/var/
+.well-known/acme-challenge
+/vendor/
+###< symfony/framework-bundle ###
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+app/config/parameters.yml
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
+.php_cs.cache
+.php_cs.dist
+access.log
+error.log
+phpunit.xml.dist
+symfony.lock
+.git.sh.swp
+composer.lock

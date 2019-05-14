@@ -1,0 +1,9 @@
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    globals:
+        fbAppId: "%facebook.app.id%"
+        fbApiVer: "%facebook.default_graph_version%"
+        title: 'Icontext %listener.type% leadgen integration'
+    paths: ['%kernel.project_dir%/templates']

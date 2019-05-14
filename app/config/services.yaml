@@ -1,0 +1,119 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: "ru"
+    listener.type: "%env(APP_SOCIAL_TYPE)%"
+    facebook.config:
+        app_id: "%facebook.app.id%"
+        app_secret: "%facebook.app.secret%"
+        default_graph_version: "%facebook.default_graph_version%"
+
+
+services:
+ # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+
+    console.logger:
+        alias: monolog.logger
+        public: true
+
+    facebook.service:
+        class: Facebook\Facebook
+        public: true
+        arguments: [ "%facebook.config%" ]
+        calls :
+            - [ setDefaultAccessToken, ['%facebook.access.token%'] ]
+
+    SocialBundle\Controller\SocialController:
+        public: true
+
+    SocialBundle\Command\:
+        resource: '../../src/SocialBundle/Command/*Command.php'
+        tags: ["console.command"]
+
+    facebook.listener.params:
+        class: Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+        arguments:
+            $parameters:
+                currentListener: "%fb.listener%"
+                facebookAppToken: "%facebook.app.token%"
+                facebookAppSecret: "%facebook.app.secret%"
+                facebookAppId: "%facebook.app.id%"
+                facebookAccessToken: "%facebook.access.token%"
+                facebookVerifyToken: "%facebook.verify.token%"
+
+    facebook.listener:
+        class: SocialBundle\EventListener\FacebookListener
+        arguments:
+            - "@facebook.service"
+            - "@security.token_storage"
+            - "@facebook.listener.params"
+            - "@?logger"
+            - "@twig"
+            - "@doctrine.orm.entity_manager"
+            - "@event_dispatcher"
+
+        tags:
+            - { name: kernel.event_listener, event: fb.confidence }
+            - { name: kernel.event_listener, event: get }
+            - { name: kernel.event_listener, event: put }
+            - { name: kernel.event_listener, event: get.pages }
+            - { name: kernel.event_listener, event: set.pages }
+            - { name: kernel.event_listener, event: get.subscription }
+            - { name: kernel.event_listener, event: change.subscription }
+            - { name: kernel.event_listener, event: change.form.status }
+            - { name: kernel.event_listener, event: set.mind.box }
+            - { name: kernel.event_listener, event: get.forms }
+            - { name: kernel.event_listener, event: add.mail }
+            - { name: kernel.event_listener, event: delete.mail }
+            - { name: kernel.event_listener, event: get.auth }
+            - { name: kernel.event_listener, event: grab.token }
+
+
+    facebook.webhook.listener:
+        class: SocialBundle\EventListener\FacebookWebhookListener
+        arguments:
+            - "@facebook.service"
+            - "@facebook.listener.params"
+            - "@?logger"
+            - "@twig"
+            - "@doctrine.orm.entity_manager"
+        tags:
+            - { name: kernel.event_listener, event: facebook.webhook }
+            - { name: kernel.event_listener, event: webhook.request }
+
+    vkontakte.listener.params:
+        class: Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+        arguments:
+            $parameters:
+                vkConfirmedToken: "%vk.confirmation_token%"
+                VkResponseOk: "%vk.response.ok%"
+                vkCatchConfig: "%vk_catch.config%"
+
+    vkontakte.listener:
+        class: SocialBundle\EventListener\VkontakteListener
+        arguments:
+            - "@vkontakte.listener.params"
+            - "@?logger"
+            - "@twig"
+            - "@doctrine.orm.entity_manager"
+            - "@event_dispatcher"
+        tags:
+            - { name: kernel.event_listener, event: leads }
+
+    vkontakte.webhook.listener:
+        class: SocialBundle\EventListener\VkontakteWebhookListener
+        arguments:
+            - "@vkontakte.listener.params"
+            - "@?logger"
+            - "@twig"
+            - "@doctrine.orm.entity_manager"
+            - "@event_dispatcher"
+        tags:
+            - { name: kernel.event_listener, event: vk.lead.received }

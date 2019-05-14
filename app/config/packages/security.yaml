@@ -1,0 +1,39 @@
+security:
+     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        facebook_oauth:
+            id: facebook_o_auth.user.provider
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            pattern: ^/
+            anonymous: ~
+            oauth:
+                resource_owners:
+                #    facebook: "/login/check-facebook"
+                login_path: "/login"
+                failure_path: "/unauthorised"
+
+                # FOSUB integration
+                oauth_user_provider:
+                    service: facebook_o_auth.user.provider
+            logout:
+                path: /logout
+
+    access_control:
+        - { path: ^/social, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/confidence, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/unauthorised, roles: ROLE_API_USER }
+        - { path: ^/user, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/grab, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/leads, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/redirect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/webhook, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }

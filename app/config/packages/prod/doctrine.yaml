@@ -1,0 +1,23 @@
+# Doctrine Configuration
+doctrine:
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        default_entity_manager: leads
+        entity_managers:
+            leads:
+                connection: leads
+                query_cache_driver: array
+                result_cache_driver: array
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                auto_mapping: true
+    dbal:
+        default_connection: leads
+        connections:
+            leads:
+                driver: pdo_mysql
+                host: "%leads_host%"
+                user: "%leads_user%"
+                password: "%leads_password%"
+                port: "%leads_port%"
+                dbname: "%leads_name%"
+                charset: utf8

@@ -1,0 +1,4 @@
+services:
+    facebook_o_auth.user.provider:
+        parent: hwi_oauth.user.provider.entity
+        class: SocialBundle\Security\User\UserProvider

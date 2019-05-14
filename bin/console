@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+use App\AppKernel;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$input = new ArgvInput();
+$env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'prod');
+$debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(array('--no-debug', '')) && $env !== 'prod';
+
+$kernel = new AppKernel($env, $debug);
+$console = new Application($kernel);
+$console->run($input);

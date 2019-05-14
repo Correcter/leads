@@ -1,0 +1,108 @@
+
+# Webhooks events prepare
+
+facebook.webhook:
+    path:     /webhook
+    defaults: { _controller: SocialBundle:Social:social, event: facebook.webhook }
+    methods: [POST, GET]
+
+vkontakte.webhook:
+    path:     /webhook
+    defaults: { _controller: SocialBundle:Social:social, event: vk.lead.received }
+    methods: [POST, GET]
+
+# Static methods
+
+oauth.login:
+    path:     /login
+    defaults: { _controller: SocialBundle:Oauth:login }
+    methods: [GET]
+
+oauth.confidence:
+    path:     /confidence
+    defaults: { _controller: SocialBundle:Oauth:confidence }
+    methods: [GET]
+
+hwi_oauth_service_redirect:
+    path:     /redirect
+    defaults: { _controller: SocialBundle:Oauth:redirect }
+    methods: [GET]
+
+
+# Vkontakte Listener
+
+vkontakte.leads:
+    path:     /leads/{limit}
+    defaults: { _controller: SocialBundle:Social:social, event: leads }
+    methods: [GET]
+
+
+# Facebook Listener
+
+facebook_login:
+    path: "/login/check-facebook"
+
+leads.get:
+    path:     /
+    defaults: { _controller: SocialBundle:Social:social, event: get }
+    methods: [GET]
+
+leads.put:
+    path:     /user/{user_id}
+    defaults: { _controller: SocialBundle:Social:social, event: put }
+    methods: [PUT]
+
+user_pages_get:
+    path: /user/{user_id}/pages
+    defaults: { _controller: SocialBundle:Social:social, event: get.pages }
+    methods: [GET]
+
+leads.pages.set:
+    path: /user/{user_id}/pages
+    defaults: { _controller: SocialBundle:Social:social, event: set.pages }
+    methods: [POST]
+
+leads.subcriptions:
+    path: /user/{user_id}/subscriptions
+    defaults: { _controller: SocialBundle:Social:social, event: get.subscription }
+    methods: [GET]
+
+leads.subcription.change:
+    path: /user/{user_id}/page/{page_id}/subscription/{value}
+    defaults: { _controller: SocialBundle:Social:social, event: change.subscription }
+    methods: [POST, DELETE]
+
+leads.forms.get:
+    path: /user/{user_id}/page/{page_id}/forms
+    defaults: { _controller: SocialBundle:Social:social, event: get.forms }
+    methods: [GET]
+
+leads.forms.change:
+    path: /form/change
+    defaults: { _controller: SocialBundle:Social:social, event: change.form.status }
+    methods: [POST]
+
+leads.mindbox.set:
+    path: /page/{page_id}/mindbox
+    defaults: { _controller: SocialBundle:Social:social, event: set.mind.box }
+    methods: [POST]
+
+leads.mail.post:
+    path: /user/{user_id}/mail
+    defaults: { _controller: SocialBundle:Social:social, event: add.mail }
+    methods: [POST]
+
+leads.mail.delete:
+    path: /user/{user_id}/mail
+    defaults: { _controller: SocialBundle:Social:social, event: delete.mail }
+    methods: [DELETE]
+
+app.auth:
+    path: /app
+    defaults: { _controller: SocialBundle:Social:social, event: get.auth }
+    methods: [GET]
+
+grab.token:
+    path: /grab/{user_id}
+    defaults: { _controller: SocialBundle:Social:social, event: grab.token }
+    methods: [GET]

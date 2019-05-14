@@ -1,0 +1,18 @@
+httplug:
+    profiling: false
+    plugins:
+        logger: ~
+#    clients:
+#        acme:
+#            factory: 'httplug.factory.guzzle6'
+#            plugins: ['httplug.plugin.logger']
+#            config:
+#                timeout: 2
+#    profiling: false
+#    #"%kernel.debug%"
+#        captured_body_length: 1000 # Capture the first 1000 chars of the HTTP body
+#    classes:
+#        client: Http\Adapter\Guzzle6\Client
+#        message_factory: Http\Message\MessageFactory\GuzzleMessageFactory
+#        uri_factory: Http\Message\UriFactory\GuzzleUriFactory
+#        stream_factory: Http\Message\StreamFactory\GuzzleStreamFactory
