@@ -3,12 +3,12 @@
 # http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
     locale: ru
-    app.host: fb.icontext.ru
-    leads_host:     icontextdev.ru
+    app.host: fb.host.ru
+    leads_host:     leadhost.ru
     leads_port:     3306
-    leads_name:     leads
-    leads_user:     leads
-    leads_password: HuAgqd7623kh83gugg232f
+    leads_name:     leads_name
+    leads_user:     leads_user
+    leads_password: leads_pass
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
@@ -16,25 +16,13 @@ parameters:
     vk.listener: vk
     vk.confirmation_token: VK_TOKEN
     vk.response.ok: ok
-    vk_catch.config:
-            147013387: { confirmation: "482046b3" }
-            122143093: { confirmation: "5c67b563" }
-            130073659: { confirmation: "9862038e" }
-            # Lancome
-            40175538:  { confirmation: "fc3ab198" }
-            # Loreal Paris
-            86111151:  { confirmation: "6fa8d344" }
-            # Kiehl's
-            69527775:  { confirmation: "c6f54b35" }
-            # YSL
-            124891240: { confirmation: "6a9c403a" }
-
+    
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
     facebook.default_graph_version: v3.1
-    facebook.app.id:        700189196789836
-    facebook.app.secret:    d5fca327aab79d3fe75c21e3fcc8492f
-    facebook.verify.token:  269f69a1f4a30e57e52141424ecc1f49
-    facebook.app.token: 700189196789836|Gn_7-ZfgwfEINSfRg8n_NHc-euU
+    facebook.app.id:        number_of_app
+    facebook.app.secret:    secret_of_app
+    facebook.verify.token:  verify_token
+    facebook.app.token: app_token
     facebook.get.leads.limit: 10
-    facebook.access.token: EAAJ80YBZAqEwBAEkVnZAlZAWvCXYv1cAYmk9QJkXvaVB8IZCUKwNXfRSglGjlJBrYZBZAUXP65C9NBpkVVluV5qiffDEBbonp8DFS7qdZATEdQzYfj1g7A14gTQw09MFd0pM9E0aj7VyNyMyaWUq2LSqWOrULN1woxEqcK04gGNfRGrlzP2AAMmE5lm8MugUACLE3LwgSbSCwZDZD
+    facebook.access.token: access_token
