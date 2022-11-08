@@ -1,52 +1,52 @@
-#### Работа с социальными сетями:
+#### Working with social networks:
 
-##### Приложение включает в себя:
+##### The application includes:
 
- Функционал для работы с командной строкой **http://social.icontext.ru/cmd/commands**
+ Functionality for working with the command line **http://social.icontext.ru/cmd/commands**
  Facebook.
 
- 1. Авторизация и аутентификация;
-- Необходимо ввести данные пароль пользвателя FB, с которым будет работать приложение;
-- Полчение прав доступа, в соответствии с аккаунтом и назначенными привилегиями работы с приложением;
+ 1. Authorization and authentication;
+- It is necessary to enter the password of the FB user with whom the application will work;
+- Assignment of access rights, in accordance with the account and assigned privileges to work with the application;
  
-2. Получение связки: СТРАНИЦА -> ФОРМА -> ЛИДЫ из FB:
-- Получение всех разрешенных страниц приложения;
-- Выборка всех разрешенных форм, с привязанными к ним лидами;
-- Запись лидов в файл формы лидов и во временную таблицу tmp_fb_leads
-- Подписывание страницы лида на получение данных из FB, в случе их изменения или добавления;
+2. Getting a bundle: PAGE -> FORM -> LEADS from FB:
+- Getting all allowed application pages;
+- Selection of all allowed forms, with leads linked to them;
+- Writing leads to the lead form file and to the temporary table tmp_fb_leads
+- Signing the lead page to receive data from FB, in case they are changed or added;
 
-3. Подписывание на событие **leadgen** из FB 
-- Клик на непомеченной строке (белого цвета) инициирует подписку;
-- Клик на помеченной строке (зеленого цвета) удаляет подписку;
+3. Subscribing to the **leadgen** event from FB 
+- Clicking on an unlabeled line (white) initiates a subscription;
+- Clicking on the marked line (green) deletes the subscription;
 
-4. Кнопка "Далее" позволяет перейти в отдел иерархии и добавить почту для лида;
- - Открываем: ФОРМА -> ЛИД -> поле для ввода почтового ящика;
- - Добавляем почтовый/почтовые ящики, на которые будут отсылаться свежие лиды;
+4. The "Next" button allows you to go to the hierarchy department and add mail for the lead;
+ - Open: FORM -> LEAD -> mailbox input field;
+ - Adding a mailbox /mailboxes to which fresh leads will be sent;
  
   
-Получение лидов:
+Getting Leads:
 
-- из папки проекта, командой консоли:
+- from the project folder, using the console command:
 
   **bin/console facebook:get-leads**
- 
-- каманда инициирует загрузку лидов в базу данных, а так же в файлы .csv
 
-Затрагиваемые таблицы и файлы:
+- kamanda initiates uploading leads to the database, as well as to .csv files
+
+Affected tables and files:
 
 **tmp_fb_leads, fb_leads, /tmp/***
 
-Отправка лидов:
+Sending Leads:
 
-- из папки проекта, командой консоли:
+- from the project folder, using the console command:
 
   **bin/console facebook:send-leads**
 
-Запрашиваемые данные:
+Requested data:
 
-fb_form_mails (на те почтовые ящики, где лид не был получен), в связке с fb_leads
+fb_form_mails (to those mailboxes where the lead was not received), in conjunction with fb_leads
 
-   - Ошибки, в случае отсутствия данных: 
+   - Errors, in case of missing data: 
       
       **HTTP/1.1 204 HTTP NO CONTENT**
     
